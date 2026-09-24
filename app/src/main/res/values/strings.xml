@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">OTT TV</string>
+    <string name="activation_title">Activa tu dispositivo</string>
+    <string name="activation_subtitle">Ve a tuweb.com/activate e introduce el siguiente código</string>
+    <string name="activation_code_label">Código de activación</string>
+    <string name="activation_status_connecting">Conectando con el servidor…</string>
+    <string name="activation_status_waiting">Esperando activación…</string>
+    <string name="activation_status_activating">Autorizando dispositivo…</string>
+    <string name="activation_status_success">Dispositivo registrado correctamente</string>
+    <string name="activation_status_error">No se pudo completar la activación</string>
+    <string name="activation_retry">Reintentar</string>
+    <string name="error_network">Sin conexión a internet</string>
+    <string name="error_server">Error del servidor. Inténtalo más tarde.</string>
+    <string name="error_unknown">Ocurrió un error inesperado</string>
+</resources>
