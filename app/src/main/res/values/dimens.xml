@@ -1,0 +1,11 @@
+<resources>
+    <dimen name="spacing_xs">8dp</dimen>
+    <dimen name="spacing_s">16dp</dimen>
+    <dimen name="spacing_m">24dp</dimen>
+    <dimen name="spacing_l">32dp</dimen>
+    <dimen name="spacing_xl">48dp</dimen>
+    <dimen name="text_title">48sp</dimen>
+    <dimen name="text_subtitle">24sp</dimen>
+    <dimen name="text_code">72sp</dimen>
+    <dimen name="text_status">20sp</dimen>
+</resources>
