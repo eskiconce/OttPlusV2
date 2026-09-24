@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>OttPlusV2 Architecture</title>
+<style>
+body{font-family:sans-serif;background:#0F172A;color:#E2E8F0;padding:2rem}
+h1{font-size:2rem;text-align:center;color:#38BDF8}
+h2{font-size:1.2rem;color:#38BDF8;border-bottom:1px solid #334155;padding-bottom:.5rem;margin:1.5rem 0 .75rem}
+.L{background:#1E293B;border-radius:12px;padding:1.25rem;margin:.75rem 0;border-left:4px solid #38BDF8}
+.P{border-left-color:#22C55E}.D{border-left-color:#F59E0B}.Da{border-left-color:#38BDF8}.E{border-left-color:#EF4444}
+.L h3{font-size:.95rem;margin-bottom:.5rem}
+.C{background:#0F172A;border-radius:8px;padding:.5rem .75rem;margin:.35rem 0;font-size:.85rem}
+.A{text-align:center;font-size:1.5rem;color:#64748B;margin:.25rem 0}
+table{width:100%;border-collapse:collapse;font-size:.8rem;margin:.75rem 0}
+th{background:#334155;padding:.5rem;text-align:left}
+td{padding:.5rem;border-bottom:1px solid #334155}
+pre{background:#0F172A;padding:1rem;border-radius:8px;overflow-x:auto;font-size:.8rem;line-height:1.6}
+.LB{font-size:.75rem;color:#94A3B8;margin-bottom:.25rem}
+</style>
+</head><body>
+<h1>OttPlusV2 - Architecture Diagram</h1>
+<h2>Clean Architecture Layers</h2>
+<div class="L P"><h3>Presentation Layer</h3>
+<div class="C"><strong>ActivationActivity</strong> - Fragment container, entry point</div>
+<div class="C"><strong>ActivationFragment</strong> - UI: code display, progress, status, retry</div>
+<div class="C"><strong>ActivationViewModel</strong> - StateFlow for UI state</div></div>
+<div class="A">&#9660; MVVM + StateFlow</div>
+<div class="L D"><h3>Domain Layer</h3>
+<div class="C"><strong>ActivationUseCase</strong> - Orchestrate register + polling as Flow</div>
+<div class="C"><strong>ActivationUiState</strong> - Sealed class: Loading/WaitingForUser/Activated/Error</div></div>
+<div class="A">&#9660; Repository pattern</div>
+<div class="L Da"><h3>Data Layer</h3>
+<div class="C"><strong>ActivationRepository</strong> - Register device, poll status, handle response</div>
+<div class="C"><strong>OttApiService</strong> - Retrofit interface (POST register, POST status)</div>
+<div class="C"><strong>OttApiClient</strong> - Retrofit + OkHttp singleton</div>
+<div class="C"><strong>AuthTokenStore</strong> - SharedPreferences: tokens + state</div>
+<div class="C"><strong>DeviceIdProvider</strong> - Persistent UUID per device</div></div>
+<div class="A">&#9660; HTTP/REST</div>
+<div class="L E"><h3>Backend API (External)</h3>
+<div class="C">POST /api/v1/devices/register &#8594; activation_code + expires_in</div>
+<div class="C">POST /api/v1/devices/status &#8594; status + tokens</div>
+<div class="C">POST /api/v1/devices/activate &#8594; called by Frontend Web</div></div>
+<div class="A">&#9650;</div>
+<div class="L E"><h3>Frontend Web (External)</h3>
+<div class="C">tuweb.com/activate - User enters code, links device to account</div></div>
+<h2>Activation Flow</h2>
+<table><tr><th>#</th><th>Step</th><th>Component</th><th>Action</th></tr>
+<tr><td>1</td><td>Register device</td><td>TV &#8594; Backend</td><td>POST /devices/register</td></tr>
+<tr><td>2</td><td>Receive code</td><td>Backend &#8594; TV</td><td>{activation_code, expires_in:600}</td></tr>
+<tr><td>3</td><td>Display code</td><td>ActivationFragment</td><td>Shows ABC-DEF-123 + URL</td></tr>
+<tr><td>4</td><td>User enters code</td><td>Frontend Web</td><td>tuweb.com/activate</td></tr>
+<tr><td>5</td><td>Link to account</td><td>Frontend &#8594; Backend</td><td>POST /devices/activate</td></tr>
+<tr><td>6</td><td>Poll status</td><td>TV &#8594; Backend</td><td>POST /devices/status (5s)</td></tr>
+<tr><td>7</td><td>Receive tokens</td><td>Backend &#8594; TV</td><td>{activated, tokens}</td></tr>
+<tr><td>8</td><td>Save + navigate</td><td>AuthTokenStore</td><td>SharedPrefs &#8594; Home</td></tr></table>
+<h2>Tech Stack</h2>
+<table><tr><th>Component</th><th>Technology</th></tr>
+<tr><td>Language</td><td>Kotlin 1.9.22</td></tr>
+<tr><td>Min SDK</td><td>API 21 (Android 5.0)</td></tr>
+<tr><td>UI TV</td><td>AndroidX Leanback 1.0.0</td></tr>
+<tr><td>Player</td><td>ExoPlayer (pending)</td></tr>
+<tr><td>Network</td><td>Retrofit 2.9.0 + OkHttp 4.12.0</td></tr>
+<tr><td>Build</td><td>Gradle 8.4, AGP 8.2.2</td></tr></table>
+</body></html>
