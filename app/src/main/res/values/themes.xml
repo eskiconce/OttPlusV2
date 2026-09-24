@@ -1,0 +1,34 @@
+<resources>
+    <style name="Theme.OttTv" parent="Theme.Leanback">
+        <item name="android:windowBackground">@color/background_dark</item>
+        <item name="android:colorPrimary">@color/colorPrimary</item>
+        <item name="android:colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="android:colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="Theme.OttTv.Activation" parent="Theme.OttTv">
+        <item name="android:windowBackground">@color/background_dark</item>
+        <item name="android:windowFullscreen">true</item>
+    </style>
+
+    <style name="Text.OttTv.Title" parent="TextAppearance.Leanback.Title">
+        <item name="android:textColor">@color/text_primary</item>
+        <item name="android:textSize">@dimen/text_title</item>
+    </style>
+
+    <style name="Text.OttTv.Subtitle" parent="TextAppearance.Leanback.Subheader">
+        <item name="android:textColor">@color/text_secondary</item>
+        <item name="android:textSize">@dimen/text_subtitle</item>
+    </style>
+
+    <style name="Text.OttTv.Code" parent="TextAppearance.Leanback.Title">
+        <item name="android:textColor">@color/text_primary</item>
+        <item name="android:textSize">@dimen/text_code</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="Text.OttTv.Status" parent="TextAppearance.Leanback.BodyItemText">
+        <item name="android:textColor">@color/text_secondary</item>
+        <item name="android:textSize">@dimen/text_status</item>
+    </style>
+</resources>
