@@ -16,7 +16,7 @@
         <item name="android:textSize">@dimen/text_title</item>
     </style>
 
-    <style name="Text.OttTv.Subtitle" parent="TextAppearance.Leanback.Subheader">
+    <style name="Text.OttTv.Subtitle" parent="TextAppearance.Leanback.Body.Text">
         <item name="android:textColor">@color/text_secondary</item>
         <item name="android:textSize">@dimen/text_subtitle</item>
     </style>
@@ -27,7 +27,7 @@
         <item name="android:textStyle">bold</item>
     </style>
 
-    <style name="Text.OttTv.Status" parent="TextAppearance.Leanback.BodyItemText">
+    <style name="Text.OttTv.Status" parent="TextAppearance.Leanback.Body.Text">
         <item name="android:textColor">@color/text_secondary</item>
         <item name="android:textSize">@dimen/text_status</item>
     </style>
